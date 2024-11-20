@@ -1,2 +1,6 @@
 obj
 bin
+*.tfstate
+.terraform
+*.hcl
+aztfexportResourceMapping.json
