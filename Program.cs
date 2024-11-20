@@ -16,8 +16,15 @@ var subscription = await armClient.GetDefaultSubscriptionAsync();
 string resourceGroupName = "MyResourceGroup";
 string location = "eastus";
 
-ResourceGroupData resourceGroupData = new ResourceGroupData(location);
-ArmOperation<ResourceGroupResource> operation = await subscription.GetResourceGroups().CreateOrUpdateAsync(WaitUntil.Completed, resourceGroupName, resourceGroupData);
-ResourceGroupResource resourceGroup = operation.Value;
-
-Console.WriteLine($"Resource Group '{resourceGroup.Data.Name}' created in location '{resourceGroup.Data.Location}'.");
+try
+{
+	ResourceGroupData resourceGroupData = new ResourceGroupData(location);
+	ArmOperation<ResourceGroupResource> operation = await subscription.GetResourceGroups().CreateOrUpdateAsync(WaitUntil.Completed, resourceGroupName, resourceGroupData);
+	ResourceGroupResource resourceGroup = operation.Value;
+	Console.WriteLine($"Resource Group '{resourceGroup.Data.Name}' created in location '{resourceGroup.Data.Location}'.");  
+}
+catch (System.Exception)
+{
+  
+  throw;
+}
